@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://thymeleaf.org">
+    <head>
+        <title>Spring Boot Project: MyCodeBlog</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Insere recursos do Bootstrap -->
+        <!-- CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" crossorigin="anonymous">
+    </head>
+    <body>
+        <header>
+            <nav class="navbar navbar-dark bg-dark">
+                <span class="navbar-brand mb-0 h1" style="font-weight: bold;">MyCodeBlog</span>
+                <a href="/newpost" class="btn btn-primary" role="button">Novo Post</a>
+            </nav>
+        </header>
+        
+        <section>           
+            <div class="container" style="width: 60%; padding-bottom: 30px;">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb" style="background-color: white; padding-left: 0px;">
+                        <li class="breadcrumb-item active" aria-current="page">Posts</li>
+                    </ol>
+                </nav>
+                
+                <!-- Percorre cada objeto 'post' do atributo 'posts' (lista de posts), definido no Controller. -->
+                <div class="card shadow-sm bg-white rounded" style="margin-top: 20px;" th:each="post : ${posts}">
+                    <div class="card-body">
+                        <!-- Autor e Data de publicação -->
+                        <p class="card-subtitle mb-2 text-muted" style="font-size: 0.8rem;">
+                            <span th:text="${post.autor}"></span>
+                            <span th:text="${post.data}"></span>
+                        </p>
+                        
+                        <!-- Título do post, que servirá de link para a URL de cada post individual -->
+                        <!-- Note para a siga do Controller "CC" referente ao CodeblogController -->
+                        <a th:href="${(#mvc.url('CC#getPostDetails').arg(0, post.id)).build()}">
+                            <h4 class="card-title" style="font-weight: bold; color: black; padding-top: 5px;">
+                                <span th:text="${post.titulo}"></span>
+                            </h4>
+                        </a>
+                        
+                        <!-- Prévia da publicação (limita aos primeiros 400 caracteres) -->
+                        <p class="card-text"><span th:utext="${#strings.abbreviate(post.texto, 400)}"></span></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://thymeleaf.org">
+    <head>
+        <title>Spring Boot Project: MyCodeBlog</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Insere recursos do Bootstrap -->
+        <!-- CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" crossorigin="anonymous">
+        <!-- JavaScript / Summernote (Formatação de Texto) files -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
+    </head>
+    <body>
+        <header>
+            <nav class="navbar navbar-dark bg-dark">
+                <span class="navbar-brand mb-0 h1" style="font-weight: bold;">MyCodeBlog</span>
+            </nav>
+        </header>
+        
+        <section>           
+            <div class="container" style="width: 60%; padding-bottom: 30px;">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb" style="background-color: white; padding-left: 0px;">
+                        <li class="breadcrumb-item" aria-current="page"><a href="/posts">Posts</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"> Novo Post</li>
+                    </ol>
+                </nav>
+                
+                <div>
+                    <!-- Incluir HTML a parte, referente à mensagem de validação -->
+                    <th:block th:include="msgValidacao"></th:block>
+                    <!-- Formulário para inserção do novo post. -->
+                    <form method="post">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="titulo" placeholder="Título *" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="autor" placeholder="Autor *" required>
+                        </div>
+                        <textarea id="summernote" type="text" class="form-control" name="texto" placeholder="Texto *" required></textarea>
+                        <small class="form-text text-muted">(*) Campos obrigatórios</small>
+                        <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Publicar</button>
+                        <a href="/posts" class="btn btn-light" role="button" style="margin-top: 10px;">Cancelar</a>  
+                    </form>
+                </div>
+            </div>
+        </section>
+        
+        <script>
+            $('#summernote').summernote({
+                placeholder: 'Texto *',
+                tabsize: 2,
+                height: 300
+            });
+        </script>
+    </body>
+</html>
